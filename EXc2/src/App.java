@@ -1,7 +1,6 @@
 
-import Serveur.*;
-import Client.Client;
-
+import ServeurTCP.*;
+import ClientTCP.*;
 public class App {
     public static void main(String[] args) throws Exception {
             System.out.println("------Satrting the Test -------");
@@ -9,8 +8,7 @@ public class App {
             Client client = new Client("127.0.0.1",8000);
             Thread serverInstance = new Thread(server);
             serverInstance.start();
-            client.sendMessage("message to server");
-            server.serveurDown();
+            client.CreateVoiture("voiture Peugot", "Partner" ,140);
             client.clientDown();
         }
 }

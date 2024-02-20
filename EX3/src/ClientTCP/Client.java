@@ -2,8 +2,6 @@ package ClientTCP;
 
 import java.net.*;
 import Component.Voiture;
-import Data.Personne;
-
 import java.util.*;
 import java.io.ObjectInputStream;
 
@@ -29,16 +27,19 @@ public class Client {
         }
     }
 
-    public void AddPersonne(int age ,String Name){
+    public void CreateVoiture(String type,String model,int carburant){
         try{
             if(this.socket!=null){
                 Voiture v = new Voiture(type,model);
                 ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-                Personne pers= new Personne(age,Name);
-                output.writeObject(pers); 
-                Integer response = (Integer)(input.readObject());
-                System.out.println("ID is   :  "+response);              
+                Map<String,Object> Data = new HashMap<>();
+                Data.put("voiture", v);
+                Data.put("Carburant",carburant);
+                output.writeObject(Data); 
+                Object response = input.readObject();
+                Voiture Result = (response instanceof Voiture) ? (Voiture) response : null;
+                System.out.println(Result.toString());              
             }
             else throw  new InternalError ("Error ! message not send");
 

@@ -1,4 +1,4 @@
-package TP3.Server;
+package Server;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -1,15 +1,15 @@
-package TP3.Client;
+package Client;
 
 import java.rmi.Naming;
 import java.util.Scanner;
 
-import TP3.Server.ArithOpImpl;
+import Server.IArithOp;
 
 public class CLient {
     public static void main (String args[]){
+        Scanner scanner = new Scanner (System.in);
         try{
-            ArithOpImpl mediator = (ArithOpImpl) Naming.lookup("rmi://localhost:1099/AithmeticOperations");
-            Scanner scanner = new Scanner (System.in);
+            IArithOp mediator = (IArithOp) Naming.lookup("rmi://localhost:1099/AithmeticOperations");
             while (true) {
                 System.out.println("Donner l'opperateur");
                 char operateur =scanner.nextLine().charAt(0);
@@ -34,6 +34,9 @@ public class CLient {
         catch (Exception e) {
             System.out.println ("Erreur d'accés à l'objet distant.");
             System.out.println (e.toString());
+        }
+        finally{
+            scanner.close();
         }
     }
     

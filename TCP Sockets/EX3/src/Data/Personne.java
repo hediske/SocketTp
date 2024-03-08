@@ -1,4 +1,7 @@
 package Data;
+
+import java.io.Serializable;
+
 public class Personne implements Serializable {
     private Integer age;
     private String name;
